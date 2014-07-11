@@ -5,13 +5,12 @@
  */
 
 package Gestion;
-
 import java.sql.SQLException;
-
 /**
  * @author Darwin
  */
-public interface IGestion {
+public interface IGestion 
+{
     public void Grabar () throws SQLException;
     public void Modificar() throws SQLException;
     public void Nuevo() throws SQLException;

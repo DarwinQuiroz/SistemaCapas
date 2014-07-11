@@ -16,7 +16,8 @@ import java.util.Set;
 /**
  * @author Darwin
  */
-public class Conexion {
+public class Conexion 
+{
     Connection ConexionDatos= null;
     PreparedStatement Sentencia= null;
     ResultSet ConjuntoDatos=null;
@@ -41,31 +42,32 @@ public class Conexion {
     
     private static Conexion Instancia=null;
     
-    public static Conexion GetInstancia ()
+    public static Conexion GetInstancia()
     {
         if (Instancia == null)
         {
-        Instancia=new Conexion( );       
+            Instancia=new Conexion( );       
         }
         return Instancia;
     }    
     
-   public void Conectar ()
+   public void Conectar()
    {
-       try {
-       ConexionDatos= DriverManager.getConnection(Cadena, Usuario, Clave);    
+       try 
+       {
+            ConexionDatos= DriverManager.getConnection(Cadena, Usuario, Clave);    
        }
        catch(SQLException ex)
        {
-         ex.getStackTrace();
+            ex.getStackTrace();
        }
                
     }
-     public void Desconectar ()       
+     public void Desconectar()       
      {
          try
          {
-         ConexionDatos.close();    
+            ConexionDatos.close();    
          }
          catch(SQLException ex)
          {
@@ -73,19 +75,17 @@ public class Conexion {
          }
      }
      
-     public void Ejecutar (String Cadena) throws SQLException
+     public void Ejecutar(String Cadena) throws SQLException
      {
          try
          {
-             Sentencia= ConexionDatos.prepareStatement(Cadena);
-         Sentencia.executeUpdate();
+            Sentencia= ConexionDatos.prepareStatement(Cadena);
+            Sentencia.executeUpdate();
          }
          catch(SQLException ex)
          {
              throw ex;
-         }
-         
-         
+         }                 
      }
     
 }

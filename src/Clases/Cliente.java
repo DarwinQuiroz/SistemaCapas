@@ -5,7 +5,6 @@
  */
 
 package Clases;
-
 /**
  *
  * @author Darwin
@@ -98,14 +97,13 @@ public class Cliente
     {
         this.Cupo = Cupo;
     }
-
+    
     public Cliente(String Cedula, String Nombre, String Direccion, double Cupo) 
     {
         this.Cedula = Cedula;
         this.Nombre = Nombre;
         this.Direccion = Direccion;
         this.Cupo = Cupo;
-    }
-
+    }   
     
 }

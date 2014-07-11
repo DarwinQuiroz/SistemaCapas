@@ -9,7 +9,9 @@ package Gestion;
 import CapaDatos.Conexion;
 import Clases.Cliente;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.swing.JTable;
 
@@ -29,13 +31,15 @@ public class GestionCliente implements IGestion
         
     }
 
-    public Cliente getCliente() {
+    public Cliente getCliente() 
+    {
         return cliente;
     }
-    public void setCliente (Cliente cliente){
-        this.cliente=cliente;
+    public void setCliente (Cliente cliente)
+    {
+        this.cliente = cliente;
     }
-    
+   
     
     @Override
     public void Grabar() throws SQLException 
@@ -43,14 +47,13 @@ public class GestionCliente implements IGestion
         try
         {
             Conexion.GetInstancia().Conectar();
-            Conexion.GetInstancia().Ejecutar("insert into cliente (cedula, nombre, direccion, cupo) values ('"+cliente.getCedula()+"','"+cliente.getNombre()+"','"+cliente.getDireccion()+"', "+cliente.getCupo()+")");
+            Conexion.GetInstancia().Ejecutar("INSERT INTO cliente (cedula, nombre, direccion, cupo) VALUES ('"+cliente.getCedula()+"','"+cliente.getNombre()+"','"+cliente.getDireccion()+"', "+cliente.getCupo()+")");
             Conexion.GetInstancia().Desconectar();    
         }
         catch(SQLException ex)
         {
             throw ex;            
-        }
-        
+        }        
     }
 
     @Override
@@ -59,7 +62,7 @@ public class GestionCliente implements IGestion
         try
         {
             Conexion.GetInstancia().Conectar();
-            Conexion.GetInstancia().Ejecutar("UPDATE cliente SET Direccion = '"+cliente.getDireccion()+"', Cupo = '"+cliente.getCupo()+"' WHERE Cedula = "+cliente.getCedula());
+            Conexion.GetInstancia().Ejecutar("UPDATE cliente SET Nombre = '"+cliente.getNombre()+"', Direccion = '"+cliente.getDireccion()+"', Cupo = '"+cliente.getCupo()+"' WHERE Cedula = "+cliente.getCedula());
             Conexion.GetInstancia().Desconectar();    
         }
         catch(SQLException ex)
@@ -70,7 +73,7 @@ public class GestionCliente implements IGestion
 
     @Override
     public void Nuevo() throws SQLException 
-    {    
+    {       
         cliente.setCedula("SD");
         cliente.setNombre("SD");
         cliente.setDireccion("SD");
@@ -91,8 +94,8 @@ public class GestionCliente implements IGestion
             throw ex;            
         }
     }
-
-    @Override
+    
+    @Override    
     public void Consultar() throws SQLException 
     { 
         try
@@ -100,8 +103,7 @@ public class GestionCliente implements IGestion
             Conexion.GetInstancia().Conectar();
            JTable jb = new JTable();
            //jb = 
-           Conexion.GetInstancia().Ejecutar("DELETE FROM Cliente WHERE Cedula = "+cliente.getCedula());
-            
+           Conexion.GetInstancia().Ejecutar("SELECT Nombre, Direccion, Cupo FROM cliente WHERE Cedula = "+cliente.getCedula());   
             Conexion.GetInstancia().Desconectar(); 
         }
         catch(SQLException ex)
