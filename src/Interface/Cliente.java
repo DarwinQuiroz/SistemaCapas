@@ -243,7 +243,6 @@ public class Cliente extends javax.swing.JFrame
         try
         {            
             gestioncliente.Consultar();
-            JOptionPane.showMessageDialog(this, "El registro existe en la base de datos");
             PasarDeNegocioAInterfaz();            
         }
         catch(SQLException ex)
