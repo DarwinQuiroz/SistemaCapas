@@ -8,8 +8,6 @@ package Interface;
 
 import Gestion.GestionCliente;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -211,7 +209,7 @@ public class Cliente extends javax.swing.JFrame
         catch(SQLException ex)
         {
             JOptionPane.showMessageDialog(this, ex.getMessage());
-        }        
+        }
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed

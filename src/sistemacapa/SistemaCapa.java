@@ -5,13 +5,12 @@
  */
 
 package sistemacapa;
-
 /**
  *
  * @author Darwin
  */
-public class SistemaCapa {
-
+public class SistemaCapa
+{
     /**
      * @param args the command line arguments
      */

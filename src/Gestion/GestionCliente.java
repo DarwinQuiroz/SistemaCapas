@@ -9,12 +9,7 @@ package Gestion;
 import CapaDatos.Conexion;
 import Clases.Cliente;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import javax.swing.JTable;
-
 
 /**
  * @author Darwin
@@ -74,7 +69,7 @@ public class GestionCliente implements IGestion
     @Override
     public void Nuevo() throws SQLException 
     {       
-        cliente.setCedula("SD");
+        cliente.setCedula("000000000-0");
         cliente.setNombre("SD");
         cliente.setDireccion("SD");
         cliente.setCupo(00.00);
@@ -110,6 +105,5 @@ public class GestionCliente implements IGestion
         { 
             throw ex;
         }
-    }
-    
+    }    
 }
