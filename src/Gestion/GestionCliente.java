@@ -8,8 +8,8 @@ package Gestion;
 
 import CapaDatos.Conexion;
 import Clases.Cliente;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.JTable;
 
 /**
  * @author Darwin
@@ -72,7 +72,7 @@ public class GestionCliente implements IGestion
         cliente.setCedula("000000000-0");
         cliente.setNombre("SD");
         cliente.setDireccion("SD");
-        cliente.setCupo(00.00);
+        cliente.setCupo(00);
     }
 
     @Override
@@ -81,7 +81,7 @@ public class GestionCliente implements IGestion
         try
         {
             Conexion.GetInstancia().Conectar();
-            Conexion.GetInstancia().Ejecutar("DELETE FROM Cliente WHERE Cedula = "+cliente.getCedula());
+            Conexion.GetInstancia().Ejecutar("DELETE FROM cliente WHERE Cedula = "+cliente.getCedula());
             Conexion.GetInstancia().Desconectar();    
         }
         catch(SQLException ex)
@@ -95,11 +95,16 @@ public class GestionCliente implements IGestion
     { 
         try
         {            
-            Conexion.GetInstancia().Conectar();
-           JTable jb = new JTable();
-           //jb = 
-           Conexion.GetInstancia().Ejecutar("SELECT Nombre, Direccion, Cupo FROM cliente WHERE Cedula = "+cliente.getCedula());   
-            Conexion.GetInstancia().Desconectar(); 
+           Conexion.GetInstancia().Conectar();
+           ResultSet rs = Conexion.GetInstancia().EjecutarConsulta("SELECT cedula, nombre, direccion, cupo FROM cliente WHERE cedula = '"+cliente.getCedula()+"';");
+           while(rs.next())
+           {
+               cliente.setCedula(rs.getString(1));
+               cliente.setNombre(rs.getString(2));
+               cliente.setDireccion(rs.getString(3));
+               cliente.setCupo(rs.getDouble(4));
+           }
+           Conexion.GetInstancia().Desconectar(); 
         }
         catch(SQLException ex)
         { 

@@ -239,7 +239,17 @@ public class Cliente extends javax.swing.JFrame
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-              
+        gestioncliente.getCliente().setCedula(txtcedula.getText());
+        try
+        {            
+            gestioncliente.Consultar();
+            JOptionPane.showMessageDialog(this, "El registro existe en la base de datos");
+            PasarDeNegocioAInterfaz();            
+        }
+        catch(SQLException ex)
+        {            
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }       
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
