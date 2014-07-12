@@ -42,13 +42,16 @@ public class GestionCliente implements IGestion
         try
         {
             Conexion.GetInstancia().Conectar();
-            Conexion.GetInstancia().Ejecutar("INSERT INTO cliente (cedula, nombre, direccion, cupo) VALUES ('"+cliente.getCedula()+"','"+cliente.getNombre()+"','"+cliente.getDireccion()+"', "+cliente.getCupo()+")");
-            Conexion.GetInstancia().Desconectar();    
+            Conexion.GetInstancia().Ejecutar("INSERT INTO cliente (Cedula, Nombre, Direccion, Cupo) VALUES ('"+cliente.getCedula()+"','"+cliente.getNombre()+"','"+cliente.getDireccion()+"', "+cliente.getCupo()+")");
         }
         catch(SQLException ex)
         {
             throw ex;            
-        }        
+        } 
+        finally
+        {
+            Conexion.GetInstancia().Desconectar();
+        }
     }
 
     @Override
@@ -57,12 +60,15 @@ public class GestionCliente implements IGestion
         try
         {
             Conexion.GetInstancia().Conectar();
-            Conexion.GetInstancia().Ejecutar("UPDATE cliente SET Nombre = '"+cliente.getNombre()+"', Direccion = '"+cliente.getDireccion()+"', Cupo = '"+cliente.getCupo()+"' WHERE Cedula = "+cliente.getCedula());
-            Conexion.GetInstancia().Desconectar();    
+            Conexion.GetInstancia().Ejecutar("UPDATE cliente SET Nombre = '"+cliente.getNombre()+"', Direccion = '"+cliente.getDireccion()+"', Cupo = '"+cliente.getCupo()+"' WHERE Cedula = "+cliente.getCedula());         
         }
         catch(SQLException ex)
         {
             throw ex;            
+        }
+        finally
+        {
+            Conexion.GetInstancia().Desconectar(); 
         }
     }
 
@@ -81,12 +87,15 @@ public class GestionCliente implements IGestion
         try
         {
             Conexion.GetInstancia().Conectar();
-            Conexion.GetInstancia().Ejecutar("DELETE FROM cliente WHERE Cedula = "+cliente.getCedula());
-            Conexion.GetInstancia().Desconectar();    
+            Conexion.GetInstancia().Ejecutar("DELETE FROM cliente WHERE Cedula = "+cliente.getCedula());   
         }
         catch(SQLException ex)
         {
             throw ex;            
+        }
+        finally
+        {
+            Conexion.GetInstancia().Desconectar(); 
         }
     }
     
@@ -96,19 +105,21 @@ public class GestionCliente implements IGestion
         try
         {            
            Conexion.GetInstancia().Conectar();
-           ResultSet rs = Conexion.GetInstancia().EjecutarConsulta("SELECT cedula, nombre, direccion, cupo FROM cliente WHERE cedula = '"+cliente.getCedula()+"';");
+           ResultSet rs = Conexion.GetInstancia().EjecutarConsulta("SELECT Nombre, Direccion, Cupo FROM cliente WHERE Cedula = '"+cliente.getCedula()+"';");
            while(rs.next())
-           {
-               cliente.setCedula(rs.getString(1));
-               cliente.setNombre(rs.getString(2));
-               cliente.setDireccion(rs.getString(3));
-               cliente.setCupo(rs.getDouble(4));
+           {              
+               cliente.setNombre(rs.getString("Nombre"));
+               cliente.setDireccion(rs.getString("Direccion"));
+               cliente.setCupo(rs.getDouble("Cupo"));
            }
-           Conexion.GetInstancia().Desconectar(); 
         }
         catch(SQLException ex)
         { 
             throw ex;
+        }
+        finally
+        {
+            Conexion.GetInstancia().Desconectar(); 
         }
     }    
 }
